@@ -1955,6 +1955,9 @@ logit2prob <- function(logit){
  for(i in 1:nrow(all_preds)){
    all_preds$monotonic[i]<-all(as.numeric(all_preds[i,paste0("year",seq(0,10))])==cummin(
      as.numeric(all_preds[i,paste0("year",seq(0,10))])))
+  
+   # In the following, we apply isotonic regression to the predicted survival probabilities using isoreq() function. 
+   
    all_preds2[i,paste0("year",seq(0,10))]<-rev(isoreg(rev(as.numeric(all_preds[i,paste0("year",seq(0,10))])))$yf)
  }
  
